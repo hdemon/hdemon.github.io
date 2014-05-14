@@ -1,0 +1,11 @@
+{
+  "name": "my-site",
+  "private": true,
+  "dependencies": {
+    "modernizr": "~2.6.2",
+    "jquery": "~1.11.0"
+  },
+  "devDependencies": {
+    "vue": "~0.10.4"
+  }
+}

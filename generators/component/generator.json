@@ -1,0 +1,16 @@
+{
+  "files": [
+    {
+      "from": "index.coffee.hbs",
+      "to": "app/scripts/components/{{name}}/index.coffee"
+    },
+    {
+      "from": "template.html.hbs",
+      "to": "app/scripts/components/{{name}}/template.html"
+    },
+    {
+      "from": "style.styl",
+      "to": "app/scripts/components/{{name}}/style.styl"
+    }
+  ]
+}
