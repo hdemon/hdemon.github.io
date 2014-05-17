@@ -1,31 +1,24 @@
+_ = require 'underscore'
 Vue = require 'vue'
-Github = require 'github-api'
 Promise = require 'bluebird'
+request = require 'superagent'
+
 
 class Articles
-  username: 'hdemon'
-  repository: 'my-site'
-  path: 'articles'
+  constructor: (@$data) ->
 
   fetch: ->
-    github = new Github @username
-    @repo = github.getRepo @username, @repository
+    @fetchIndex().then (index) => @readArticles(index)
 
-    def = Promise.defer()
-    @fetchContents().then =>
-      @readArticles().then -> def.resolve()
-    def.promise
+  fetchIndex: ->
+    new Promise (resolve, reject) =>
+      request.get "/articles/index.json", (res) ->
+        resolve JSON.parse res.text
 
-  fetchContents: ->
-    def = Promise.defer()
-    @repo.contents 'master', '/', (err, data) -> def.resolve data
-    # @repo.contents 'master', @path, (err, data) -> def.resolve data
-    def.promise
-
-  readArticles: ->
-    def = Promise.defer()
-    @repo.read 'master', 'README.md', (err, data) -> def.resolve data
-    def.promise
+  readArticles: (index) ->
+    _.each index, (fileName) =>
+      request.get "/articles/#{fileName}", (res) =>
+        @$data.articles.push {title: fileName, body: res}
 
 
 app = new Vue
@@ -36,8 +29,7 @@ app = new Vue
   data:
     articles: []
   methods:
-    fetchArticles: ->
-      new Articles().fetch().then (articles) => @$data.articles = articles
+    fetchArticles: -> new Articles(@$data).fetch()
 
 
 app.fetchArticles()
