@@ -5,31 +5,25 @@ request = require 'superagent'
 
 
 class Articles
-  constructor: (@$data) ->
-
-  fetch: ->
-    @fetchIndex().then (index) => @readArticles(index)
+  constructor: (@$articles) ->
 
   fetchIndex: ->
     new Promise (resolve, reject) =>
-      request.get "/articles/index.json", (res) ->
-        resolve JSON.parse res.text
-
-  readArticles: (index) ->
-    _.each index, (fileName) =>
-      request.get "/articles/#{fileName}", (res) =>
-        @$data.articles.push {title: fileName, body: res}
+      request.get "/articles/index.json", (res) =>
+        titles = JSON.parse res.text
+        _.each titles, (title, indexNum) => @$articles.push {id: indexNum, title: title, body: null}
+        resolve @$articles
 
 
-app = new Vue
+window.app = {}
+
+app.rootVm = new Vue
   el: "#app"
   components:
-    article: require("./components/article/index.coffee")
-  template: require("./app.html")
+    article: require "./components/article/index.coffee"
+  template: require "./app.html"
   data:
     articles: []
-  methods:
-    fetchArticles: -> new Articles(@$data).fetch()
-
-
-app.fetchArticles()
+  created: ->
+    app.articles = new Articles @$data.articles
+    app.articles.fetchIndex()
