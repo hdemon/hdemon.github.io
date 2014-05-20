@@ -120,7 +120,7 @@ gulp.task('watch', ['connect', 'serve'], function () {
 
     // watch for changes
     gulp.watch([
-        'app/*.html',
+        'app/**/*.html',
         '.tmp/styles/**/*.css',
         '.tmp/scripts/*',
         ':)/**/*',
@@ -132,6 +132,7 @@ gulp.task('watch', ['connect', 'serve'], function () {
 
     gulp.watch('app/styles/**/*.styl', ['styles']);
     gulp.watch('app/scripts/**/*.coffee', ['scripts']);
+    gulp.watch('app/scripts/**/*.html', ['scripts']);
     gulp.watch('app/images/**/*', ['images']);
     gulp.watch('bower.json', ['wiredep']);
 });
