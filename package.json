@@ -37,6 +37,9 @@
     "node": ">=0.10.0"
   },
   "dependencies": {
+    "highlight": "^0.2.3",
+    "highlight.js": "^8.0.0",
+    "marked": "^0.3.2",
     "underscore": "^1.6.0"
   }
 }
