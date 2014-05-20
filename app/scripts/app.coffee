@@ -20,7 +20,7 @@ window.app = {}
 app.rootVm = new Vue
   el: "#app"
   components:
-    article: require "./components/article/index.coffee"
+    articleIndex: require "./components/article-index/index.coffee"
   template: require "./app.html"
   data:
     articles: []
