@@ -25,8 +25,8 @@ module.exports =
   className: 'article-index'
   template: require './template.html'
   methods:
-    renderArticle: ->
+    showArticle: ->
       @fetchArticle()
 
     fetchArticle: ->
-      new Article(@$parent.$data).fetch()
+      new Article(@$data).fetch()

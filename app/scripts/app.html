@@ -1,3 +1,9 @@
-<div id="article-index" v-repeat="articles">
-  <div v-component="articleIndex" v-with="title"></div>
+<div id="window">
+  <div id="article-index-container">
+    <div v-component="articleIndex" v-repeat="articles"></div>
+  </div>
+
+  <div id="article-bodies-container">
+    <div v-component="articleBody" v-repeat="articles"></div>
+  </div>
 </div>

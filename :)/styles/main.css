@@ -24,6 +24,17 @@ body {
   color: #000;
   padding: 0.2em 0;
 }
+#window {
+  display: -webkit-flex;
+  display: flex;
+  max-width: 1000px;
+}
+#article-index-container {
+  background-color: #d3d3d3;
+}
+#article-bodies-container {
+  background-color: #808080;
+}
 
 /*
 Monokai style - ported by Luigi Maselli - http://grigio.org
