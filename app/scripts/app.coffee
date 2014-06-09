@@ -1,18 +1,5 @@
-_ = require 'lodash'
 Vue = require 'vue'
-Promise = require 'bluebird'
-request = require 'superagent'
-
-
-class Articles
-  constructor: (@$articles) ->
-
-  fetchIndex: ->
-    new Promise (resolve, reject) =>
-      request.get "/articles/index.json", (res) =>
-        titles = JSON.parse res.text
-        _.each titles, (title, indexNum) => @$articles.push {id: indexNum, title: title, body: null}
-        resolve @$articles
+Articles = require './models/articles'
 
 
 window.app = {}
@@ -30,4 +17,4 @@ app.rootVm = new Vue
 
   created: ->
     app.articles = new Articles @$data.articles
-    app.articles.fetchIndex()
+    app.articles.fetch()
