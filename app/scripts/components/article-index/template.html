@@ -1,3 +1,8 @@
-<p v-on="click: showArticle">
-  {{title}}
-</p>
+<div v-repeat="articles">
+  <p v-on="click: fetchArticleBody(this)">
+    {{title}}
+  </p>
+  <div v-component="articleBody">
+    {{body}}
+  </div>
+</div>

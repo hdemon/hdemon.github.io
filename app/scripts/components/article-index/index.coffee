@@ -1,32 +1,23 @@
 require('insert-css')(require('./style.styl'))
-_ = require 'underscore'
-request = require 'superagent'
-marked = require 'marked'
-
-marked.setOptions
-  highlight: (code) ->
-    require('highlight.js').highlightAuto(code).value
-
-
-class Article
-  constructor: (@$article) ->
-
-  hasFetched: ->
-    @$article.body?
-
-  fetch: ->
-    return if @hasFetched()
-    new Promise (resolve, reject) =>
-      request.get "/articles/#{@$article.title}.markdown", (res) =>
-        resolve @$article.body = marked res.text
+Articles = require '../../models/articles'
+Article = require '../../models/article'
 
 
 module.exports =
   className: 'article-index'
+  components:
+    articleBody: require "../../components/article-body/index.coffee"
   template: require './template.html'
+  data:
+    articles: []
   methods:
-    showArticle: ->
-      @fetchArticle()
+    fetchArticleBody: (article) ->
+      article = new Article @$data.articles[article.id]
+      article.fetch()
 
-    fetchArticle: ->
-      new Article(@$data).fetch()
+    fetchArticleIndex: ->
+      articles = new Articles @$data.articles
+      articles.fetch()
+
+  created: ->
+    @fetchArticleIndex()
