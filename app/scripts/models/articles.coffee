@@ -9,7 +9,8 @@ module.exports = class Articles extends Base
   fetch: ->
     new Promise (resolve, reject) =>
       request.get "/articles/index.json", (res) =>
-        titles = JSON.parse res.text
-        _.each titles, (title, indexNum) =>
-          @values.push new Article({id: indexNum, title: title, body: null}).values
+        metaInfoArray = JSON.parse res.text
+        _.each metaInfoArray, (metaInfo, indexNum) =>
+          {id, title, body, published} = metaInfo
+          @values.push new Article({id, title, body, published}).values
         resolve @values
