@@ -19,7 +19,7 @@ gulp.task('scripts', function () {
         .pipe($.coffeelint())
         .pipe($.coffeelint.reporter())
         .pipe($.browserify({
-            transform: ['coffeeify', 'partialify'],
+            transform: ['coffeeify', 'partialify', 'stylify'],
             extensions: ['.coffee']
         }))
         .pipe($.rename('app.js'))
@@ -131,6 +131,7 @@ gulp.task('watch', ['connect', 'serve'], function () {
     });
 
     gulp.watch('app/styles/**/*.styl', ['styles']);
+    gulp.watch('app/scripts/components/**/*.styl', ['styles']);
     gulp.watch('app/scripts/**/*.coffee', ['scripts']);
     gulp.watch('app/scripts/**/*.html', ['scripts']);
     gulp.watch('app/images/**/*', ['images']);
