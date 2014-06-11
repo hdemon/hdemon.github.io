@@ -1,4 +1,5 @@
 require('insert-css')(require('./style.styl'))
+
 Articles = require '../../models/articles'
 Article = require '../../models/article'
 
