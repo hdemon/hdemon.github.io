@@ -1,24 +1,15 @@
 require('insert-css')(require('./style.styl'))
 
-Articles = require '../../models/articles'
-Article = require '../../models/article'
-
 
 module.exports =
-  className: 'article-index'
-  components:
-    articleBody: require "../../components/article-body/index.coffee"
+  id: 'article-index'
   template: require './template.html'
   data:
-    articles: []
+    index: []
   methods:
-    fetchArticleBody: (article) ->
-      article = new Article @$data.articles[article.id]
-      article.fetch()
-
-    fetchArticleIndex: ->
-      articles = new Articles @$data.articles
-      articles.fetch()
+    showArticleBody: (article) ->
+      @$dispatch 'clickedArticleIndex', article.id
 
   created: ->
-    @fetchArticleIndex()
+    app.articles.fetch().then =>
+      @$data.index = app.articles.index

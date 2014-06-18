@@ -3,7 +3,16 @@ require('insert-css')(require('./style.styl'))
 module.exports =
   id: 'article-body'
   template: require('./template.html')
-  methods:
-    fetchBody: ->
-      console.log @$parent
-      article = new Article
+  data:
+    title: ""
+    published: ""
+    body: ""
+    isHidden: true
+  created: ->
+    @$on 'clickedArticleBody', (articleId) =>
+      @$data.isHidden = false
+
+    @$on 'fetchedArticleBody', (articleId) =>
+      entry = app.articles.entries[articleId]
+      {title, body, published} = entry
+      @$data = {title, body, published}

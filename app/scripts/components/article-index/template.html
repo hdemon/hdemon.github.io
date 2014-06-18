@@ -1,11 +1,8 @@
-<article v-repeat="articles">
-  <header v-on="click: fetchArticleBody(this)">
-    <span class="title">
-      {{title}}
-    </span>
-    <span class="published">
-      {{published}}
-    </span>
-  </header>
-  <div v-component="articleBody"></div>
+<article v-repeat="index" v-attr="data-article-id: id" v-on="click: showArticleBody(this)" v-on="touchend: showArticleBody(this)">
+  <span class="title">
+    {{title}}
+  </span>
+  <span class="published">
+    {{published}}
+  </span>
 </article>

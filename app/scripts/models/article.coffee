@@ -7,12 +7,19 @@ marked.setOptions
     require('highlight.js').highlightAuto(code).value
 
 
-module.exports = class Article extends Base
+module.exports = class Article
+  constructor: (@params) ->
+    @id = params.id
+    @title = params.title
+    @published = params.published
+    @body = null
+
   fetch: ->
-    return if @hasFetched()
+    return (new Promise (resolve) => resolve()) if @hasFetched()
     new Promise (resolve, reject) =>
-      request.get "/articles/#{@values.title}.markdown", (res) =>
-        resolve @values.body = marked res.text
+      request.get "/articles/#{@title}.markdown", (res) =>
+        @body = marked res.text
+        resolve {id: @id, title: @title, published: @published, body: @body}
 
   hasFetched: ->
-    @values.body?
+    @body?
