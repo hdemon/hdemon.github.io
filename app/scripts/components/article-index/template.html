@@ -1,4 +1,4 @@
-<article v-repeat="index" v-attr="data-article-id: id" v-on="click: showArticleBody(this)" v-on="touchend: showArticleBody(this)">
+<article v-repeat="index" v-attr="data-article-id: id" v-touch="tap: showArticleBody(this)">
   <span class="title">
     {{title}}
   </span>

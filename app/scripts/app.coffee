@@ -1,5 +1,6 @@
 Vue = require 'vue'
 Articles = require './models/articles'
+Vue.use require 'vue-touch'
 
 @app = {}
 
