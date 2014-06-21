@@ -1,8 +1,10 @@
-<article v-repeat="index" v-attr="data-article-id: id" v-touch="tap: showArticleBody(this)">
-  <span class="title">
-    {{title}}
-  </span>
-  <span class="published">
-    {{published}}
-  </span>
-</article>
+<ol>
+  <li v-repeat="index" v-attr="data-article-id: id" v-on="click: showArticleBody(this)">
+    <span class="title">
+      {{title}}
+    </span>
+    <span class="published">
+      {{published}}
+    </span>
+  </li>
+</ol>

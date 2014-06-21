@@ -11,7 +11,10 @@ body
 
 #app
     height 100%
+    padding 50px
     background-color #efefef
+    display flex
+    flex-direction column
 
 #window
     position relative
@@ -19,3 +22,13 @@ body
     margin: 0
     height 100%
     overflow-x hidden
+    background-color #efefef
+    flex-grow 1
+
+clearfix()
+    &:after
+        content ""
+        clear both
+        display block
+
+

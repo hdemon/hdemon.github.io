@@ -9,9 +9,6 @@ module.exports =
     body: ""
     isHidden: true
   created: ->
-    @$on 'clickedArticleBody', (articleId) =>
-      @$data.isHidden = false
-
     @$on 'fetchedArticleBody', (articleId) =>
       entry = app.articles.entries[articleId]
       {title, body, published} = entry

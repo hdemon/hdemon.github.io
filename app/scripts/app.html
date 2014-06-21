@@ -1,4 +1,4 @@
-<div id="window">
-  <div v-ref="articleIndex" v-component="articleIndex"></div>
-  <div v-ref="articleBody" v-component="articleBody" v-class="hidden: isHidden"></div>
+<div v-component="header" v-on="click: test"></div>
+<div>
+    <div id="window" v-view="currentView" v-with="global:data"></div>
 </div>
