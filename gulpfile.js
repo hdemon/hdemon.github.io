@@ -2,6 +2,7 @@
 // generated on 2014-05-10 using generator-gulp-webapp 0.1.0
 
 var gulp = require('gulp');
+var debug = require('gulp-debug');
 
 // load plugins
 var $ = require('gulp-load-plugins')();
@@ -57,10 +58,10 @@ gulp.task('images', function () {
 });
 
 gulp.task('fonts', function () {
-    return $.bowerFiles()
+    return gulp.src('app/styles/fonts/**/*')
         .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
         .pipe($.flatten())
-        .pipe(gulp.dest(':)/fonts'))
+        .pipe(gulp.dest(":)/styles/fonts"))
         .pipe($.size());
 });
 

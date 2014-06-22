@@ -4,7 +4,7 @@ Articles = require './models/articles'
 Vue.use require 'vue-touch'
 # Vue.config 'debug', true
 
-window.location.hash = "#"
+window.location.hash = "#/"
 
 window.app = {}
 app.rootVm = new Vue
