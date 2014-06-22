@@ -1,15 +1,16 @@
 Vue = require 'vue'
+Router = require('director').Router
 Articles = require './models/articles'
 Vue.use require 'vue-touch'
 # Vue.config 'debug', true
 
+window.location.hash = "#"
 
-@app = {}
-@app.rootVm = new Vue
+window.app = {}
+app.rootVm = new Vue
   el: "#app"
   components:
     header: require "./components/header/index.coffee"
-    # footer: require "./components/footer/index.coffee"
     articleIndex: require "./components/article-index/index.coffee"
     articleBody: require "./components/article-body/index.coffee"
   template: require "./app.html"
@@ -18,9 +19,19 @@ Vue.use require 'vue-touch'
   created: ->
     app.articles = new Articles
 
+    routes =
+      '/': (id) =>
+        @$data.currentView = 'articleIndex'
+
+      '/articles/:id': (id) =>
+        @fetchArticleBody id
+        @$data.currentView = 'articleBody'
+
+    router = Router routes
+    router.init()
+
     @$on "clickedArticleIndex", (articleId) =>
-      @$data.currentView = 'articleBody'
-      @fetchArticleBody articleId
+       window.location.hash = "/articles/#{articleId}"
 
   methods:
     fetchArticleBody: (articleId) ->

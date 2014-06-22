@@ -13,6 +13,8 @@ module.exports = class Articles
     new Promise (resolve, reject) =>
       request.get "/articles/index.json", (res) =>
         metaInfoArray = JSON.parse res.text
+        @entries = []
+        @index = []
         _.each metaInfoArray, (metaInfo, indexNum) =>
           {id, title, body, published} = metaInfo
           @entries.push new Article({id, title, body, published})
